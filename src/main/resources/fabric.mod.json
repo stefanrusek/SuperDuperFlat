@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "super_duper_flat",
+  "version": "${version}",
+  "name": "Super Duper Flat",
+  "description": "Adds Multiple 1.17-1.19 things missing from superflat worlds in a very natural vanilla style.",
+  "authors": [
+    "Stefan Rusek <stefan@rusek.org>"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/super_duper_flat/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.ergonlabs.super_duper_flat.SuperDuperFlat"
+    ]
+  },
+  "mixins": [
+    "super_duper_flat.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "${minecraft_version}"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.ergonlabs.super_duper_flat.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "mixins": [
+    "BuriedTreasureGeneratorMixin",
+    "ChunkGeneratorAccessor",
+    "ChunkGeneratorMixin",
+    "CustomizeFlatLevelScreenMixin",
+    "DefaultBiomeFeaturesMixin",
+    "FlatChunkGeneratorConfigAccessor",
+    "FlatChunkGeneratorConfigMixin",
+    "FlatChunkGeneratorMixin",
+    "JigsawStructureAccessor",
+    "RegistryEntryListDirectMixin",
+    "RegistryEntryReferenceAccessor",
+    "RegistryKeyAccessor",
+    "StructureAccessor",
+    "StructuredPieceAccessor",
+    "StructuresAccessor",
+    "StructureSetAccessor"
+  ],
+  "server": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
