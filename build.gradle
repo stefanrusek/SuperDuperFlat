@@ -4,6 +4,10 @@ plugins {
     id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
 
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
@@ -11,6 +15,7 @@ Properties properties = new Properties()
 if (file("local.properties").exists()) {
     properties.load(project.rootProject.file('local.properties').newDataInputStream())
 }
+
 
 repositories {
     // Add repositories to retrieve artifacts from in here.
@@ -21,11 +26,10 @@ repositories {
 }
 
 dependencies {
-    // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 }
@@ -42,16 +46,9 @@ processResources {
     }
 }
 
-def targetJavaVersion = 16
+def targetJavaVersion = 17
 tasks.withType(JavaCompile).configureEach {
-    // ensure that the encoding is set to UTF-8, no matter what the system default is
-    // this fixes some edge cases with special characters not displaying correctly
-    // see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
-    // If Javadoc is generated, this must be specified in that task too.
-    it.options.encoding = "UTF-8"
-    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
-        it.options.release = targetJavaVersion
-    }
+    it.options.release = targetJavaVersion
 }
 
 java {
@@ -79,9 +76,6 @@ task copyToMinecraftDir() {
     }
 }
 
-copyToMinecraftDir.mustRunAfter tasks.findByName('check')
-tasks.findByName('build').dependsOn(copyToMinecraftDir)
-
 // configure the maven publication
 publishing {
     publications {
@@ -108,6 +102,18 @@ curseforge {
 
         mainArtifact(jar) {
             displayName = "Super Duper Flat - version: $project.version"
+        }
+    }
+}
+
+task artifacts {
+    group = "Help"
+    description = "Displays the artifacts associated with each configuration of " + project
+    doFirst {
+        configurations.findAll().each { config ->
+            println "${config}:"
+            config.allArtifacts.getFiles().each { file -> println "" + file }
+            println ' '
         }
     }
 }
