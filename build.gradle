@@ -1,10 +1,16 @@
 plugins {
     id 'fabric-loom' version '0.12-SNAPSHOT'
     id 'maven-publish'
+    id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
 
 version = project.mod_version
 group = project.maven_group
+
+Properties properties = new Properties()
+if (file("local.properties").exists()) {
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+}
 
 repositories {
     // Add repositories to retrieve artifacts from in here.
@@ -90,5 +96,18 @@ publishing {
         // Notice: This block does NOT have the same function as the block in the top level.
         // The repositories here will be used for publishing your artifact, not for
         // retrieving dependencies.
+    }
+}
+
+curseforge {
+    apiKey = properties['CURSEFORGE_KEY'] ?: System.getenv("CURSEFORGE_KEY")
+    project {
+        id = '653109'
+        releaseType = 'alpha'
+        addGameVersion '1.19'
+
+        mainArtifact(jar) {
+            displayName = "Super Duper Flat - version: $project.version"
+        }
     }
 }
