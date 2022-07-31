@@ -12,3 +12,5 @@ jobs:
           distribution: 'adopt'
       - name: Build with Gradle
         run: ./gradlew build
+        env:
+          CURSEFORGE_KEY: ${{ secrets.CURSEFORGE_KEY }}
