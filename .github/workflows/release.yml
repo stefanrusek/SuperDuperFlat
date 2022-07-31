@@ -17,3 +17,7 @@ jobs:
         run: ./gradlew build
         env:
           CURSEFORGE_KEY: ${{ secrets.CURSEFORGE_KEY }}
+      - name: Release with Gradle
+        run: ./gradlew curseforge
+        env:
+          CURSEFORGE_KEY: ${{ secrets.CURSEFORGE_KEY }}

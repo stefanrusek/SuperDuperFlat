@@ -1,6 +1,7 @@
 package com.ergonlabs.super_duper_flat.mixin;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.structure.BuriedTreasureGenerator;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -13,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(targets = "net.minecraft.structure.BuriedTreasureGenerator$Piece")
+@Mixin(BuriedTreasureGenerator.Piece.class)
 public class BuriedTreasureGeneratorMixin {
 
     // Since Super flat is often just dirt, we temporarily replace the bedrock block
